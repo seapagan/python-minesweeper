@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Tk
+from tkinter import Frame, Label, Menu, Tk
 
 import settings
 import utils
@@ -37,6 +37,14 @@ center_frame = Frame(
     height=utils.height_prct(75),
 )
 center_frame.place(x=utils.width_prct(25), y=utils.height_prct(25))
+
+menubar = Menu(root)
+filemenu = Menu(menubar, tearoff=0)
+filemenu.add_command(label="New Game")
+filemenu.add_separator()
+filemenu.add_command(label="Exit", command=root.quit)
+menubar.add_cascade(label="File", menu=filemenu)
+root.config(menu=menubar)
 
 for x in range(settings.GRID_SIZE):
     for y in range(settings.GRID_SIZE):
