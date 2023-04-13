@@ -49,6 +49,16 @@ class Cell:
                 for cell in self.surrounding_cells:
                     cell.show_cell()
             self.show_cell()
+            # if the cell count is equal to number of mines, the player has won
+            if Cell.cell_count == settings.MINES_COUNT:
+                messagebox.showinfo(
+                    "You Win", "Congratulations, you have won the game"
+                )
+                sys.exit()
+
+        # cancel the left and right click events if cell is already open
+        self.cell_btn_object.unbind("<Button-1>")
+        self.cell_btn_object.unbind("<Button-3>")
 
     def get_cell_by_axis(self, x, y):
         # return a cell object based on the value of x,y
@@ -85,6 +95,8 @@ class Cell:
                 Cell.cell_count_label_object.configure(
                     text=f"Cells Left: {Cell.cell_count}"
                 )
+            # if this was a mine candidate, reset the background color
+            self.cell_btn_object.configure(bg="gray85")
             # mark this cell as open
             self.is_open = True
 
