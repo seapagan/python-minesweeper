@@ -1,4 +1,3 @@
-import random
 import sys
 from tkinter import Button, Label, messagebox
 
@@ -42,6 +41,7 @@ class Cell:
         Cell.cell_count_label_object = lbl
 
     def left_click_actions(self, event):
+        assert self.cell_btn_object is not None
         if self.is_mine:
             self.show_mine()
         else:
@@ -85,12 +85,13 @@ class Cell:
         return sum([1 for cell in self.surrounding_cells if cell.is_mine])
 
     def show_cell(self):
+        assert self.cell_btn_object is not None
         if not self.is_open:
             Cell.cell_count -= 1
             self.cell_btn_object.configure(
                 text=self.surrounding_cells_mines_count
             )
-            # replace the text of cell couimt lable with newer count
+            # replace the text of cell count lable with newer count
             if Cell.cell_count_label_object:
                 Cell.cell_count_label_object.configure(
                     text=f"Cells Left: {Cell.cell_count}"
@@ -103,20 +104,16 @@ class Cell:
     def show_mine(self):
         # a logic to interrupt game and display a message that the player has
         # lost
+        assert self.cell_btn_object is not None
         self.cell_btn_object.configure(bg="red")
         messagebox.showinfo("Game Over", "You Clicked on a Mine!")
         sys.exit()
 
     def right_click_actions(self, event):
+        assert self.cell_btn_object is not None
         if not self.is_mine_candidate:
             self.cell_btn_object.configure(bg="orange")
             self.is_mine_candidate = True
         else:
             self.cell_btn_object.configure(bg="gray85")
             self.is_mine_candidate = False
-
-    @staticmethod
-    def randomize_mines():
-        picked_cells = random.sample(Cell.all, settings.MINES_COUNT)
-        for cell in picked_cells:
-            cell.is_mine = True
