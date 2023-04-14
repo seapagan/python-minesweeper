@@ -91,7 +91,7 @@ class Cell:
             self.cell_btn_object.configure(
                 text=self.surrounding_cells_mines_count
             )
-            # replace the text of cell couimt lable with newer count
+            # replace the text of cell count lable with newer count
             if Cell.cell_count_label_object:
                 Cell.cell_count_label_object.configure(
                     text=f"Cells Left: {Cell.cell_count}"

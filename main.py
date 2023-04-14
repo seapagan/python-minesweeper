@@ -19,12 +19,14 @@ frames.place_frames()
 
 game_title = Label(
     frames.top_frame,
-    text="Minesweeper Game",
+    text="PySweeper",
     font=("", 30),
     bg="black",
     fg="white",
 )
-game_title.place(x=utils.width_prct(25), y=0)
+
+game_title.place(x=settings.WIDTH / 2, y=50, anchor="center")
+
 
 # add the menu bar
 menubar = MenuBar(root)
@@ -37,7 +39,7 @@ game_board.randomize_mines()
 
 # setup the cell-count label
 Cell.create_cell_count_label(frames.left_frame)
-Cell.cell_count_label_object.place(x=0, y=0)
+Cell.cell_count_label_object.place(x=0, y=0)  # type: ignore
 
 
 # run the window's main loop
