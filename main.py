@@ -4,6 +4,7 @@ import settings
 import utils
 from cell import Cell
 from components.frames import Frames
+from components.gameboard import GameBoard
 from components.menu import MenuBar
 
 root = Tk()
@@ -29,20 +30,14 @@ game_title.place(x=utils.width_prct(25), y=0)
 menubar = MenuBar(root)
 root.config(menu=menubar)
 
-for x in range(settings.GRID_SIZE):
-    for y in range(settings.GRID_SIZE):
-        c = Cell(x, y)
-        c.create_btn_object(frames.center_frame)
-        c.create_btn_object(frames.center_frame)
-        c.cell_btn_object.grid(
-            column=x,
-            row=y,
-        )
+# create the game board
+game_board = GameBoard(frames.center_frame)
+game_board.reset_board()
+game_board.randomize_mines()
 
-# call the label from the cell class
+# setup the cell-count label
 Cell.create_cell_count_label(frames.left_frame)
 Cell.cell_count_label_object.place(x=0, y=0)
-Cell.randomize_mines()
 
 
 # run the window's main loop

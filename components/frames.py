@@ -10,19 +10,19 @@ class Frames:
         self.parent = parent
         self.top_frame = Frame(
             parent,
-            bg="red",
+            bg="black",
             width=settings.WIDTH,
             height=utils.height_prct(25),
         )
         self.left_frame = Frame(
             parent,
-            bg="orange",
+            bg="black",
             width=utils.width_prct(25),
             height=utils.height_prct(75),
         )
         self.center_frame = Frame(
             parent,
-            bg="green",
+            bg="black",
             width=utils.width_prct(75),
             height=utils.height_prct(75),
         )
